@@ -1,2 +1,4 @@
 **/#Source
 **/prepros.config
+**/.prettierrc
+**/.eslintrc
