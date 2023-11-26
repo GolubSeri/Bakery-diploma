@@ -39,40 +39,48 @@
           <div class="container">
             <div class="home">
               <div class="home__body">
-                <form action="POST" class="home__filter">
+                <form action="" method="GET" class="home__filter">
+				  <input id="filter_input" type="hidden" value="0" name="category">
                   <nav class="home__categories">
                     <ul class="categories__list">
-                      <li class="_active">
+					  <!-- В data-id указываем id категории. Для фильтра "все" указываем 0 -->
+					  <li data-id="0">
+						<button>
+						  <img src="Img/Home/Filter/0.png" alt="" />
+						  <span>Все</span>
+						</button>
+					  </li>
+                      <li data-id="1">
                         <button>
                           <img src="Img/Home/Filter/1.png" alt="" />
                           <span>Пончики</span>
                         </button>
                       </li>
-                      <li>
+                      <li data-id="2">
                         <button>
                           <img src="Img/Home/Filter/2.png" alt="" />
                           <span>Кексы</span>
                         </button>
                       </li>
-                      <li>
+                      <li data-id="3">
                         <button>
                           <img src="Img/Home/Filter/3.png" alt="" />
                           <span>Круассаны</span>
                         </button>
                       </li>
-                      <li>
+                      <li data-id="4">
                         <button>
                           <img src="Img/Home/Filter/4.png" alt="" />
                           <span>Печенье</span>
                         </button>
                       </li>
-                      <li>
+                      <li data-id="5">
                         <button>
                           <img src="Img/Home/Filter/5.png" alt="" />
                           <span>Крендели</span>
                         </button>
                       </li>
-                      <li>
+                      <li data-id="6">
                         <button>
                           <img src="Img/Home/Filter/6.png" alt="" />
                           <span>Хлеб</span>
@@ -84,17 +92,18 @@
 
                 <div class="home__container">
                   <aside class="home__cart">
-                    <form action="POST">
-                      <div class="cart__header">
-                        <span class="cart__title">Корзина</span>
-                        <span class="cart__counter">5</span>
-                      </div>
-                      <div class="cart__body">
-                        <!-- Если корзина пустая -->
-                        <!-- <p class="cart__text-empty">Тут пока пусто :(</p> -->
-                        <!-- А это если не пустая -->
+                    <div class="cart__header">
+                      <span class="cart__title">Корзина</span>
+                      <span class="cart__counter">0</span>
+                    </div>
+                    <div class="cart__body empty">
+                      <!-- Если корзина пустая (отрабатывает на стороне фронта) -->
+                      <p class="cart__text-empty">Тут пока пусто :(</p>
+
+                      <!-- А это если не пустая (отрабатывает на стороне фронта) -->
+                      <div class="cart__items-wrapper">
                         <div class="cart__items">
-                          <div class="cart__item">
+                          <div class="cart__item cart__item_template">
                             <div class="cart__item-body">
                               <img
                                 class="cart__item-image"
@@ -103,18 +112,22 @@
                               />
                               <div class="cart__item-description">
                                 <span class="cart__item-title"
-                                  >Супер розовый</span
+                                  ></span
                                 >
-                                <span class="cart__item-weight">512г</span>
-                                <span class="cart__item-price">550₽</span>
+                                <span class="cart__item-weight"></span>
+                                <span class="cart__item-price"></span>
                               </div>
                             </div>
-                            <div class="cart__item-counter">
-                              <button class="cart__item-counter-button">
+                            <div class="cart__item-counter counter">
+                              <button
+                                class="counter__button counter__button_del"
+                              >
                                 -
                               </button>
-                              <span class="cart__item-counter-value">1</span>
-                              <button class="cart__item-counter-button">
+                              <span class="counter__value">1</span>
+                              <button
+                                class="counter__button counter__button_add"
+                              >
                                 +
                               </button>
                             </div>
@@ -122,13 +135,94 @@
                         </div>
                         <div class="cart__result">
                           <span>Итого</span>
-                          <span>550₽</span>
+                          <span class="cart__total_price">250₽</span>
                         </div>
-                        <button class="cart__button">Оформить заказ</button>
-                        <!-- Если цена больше 599 -->
+                        <a href="popup_delivery" class="cart__button popup-link"
+                          >Оформить заказ</a
+                        >
+                        <!-- Если цена больше 599 (отрабатывает на стороне фронта) -->
                         <span class="cart__delivery">Бесплатная доставка</span>
                       </div>
-                    </form>
+                    </div>
+
+                    <div class="popup popup__delivery" id="popup_delivery">
+                      <div class="popup__body">
+                        <div class="popup__content">
+                          <div class="popup__column-image">
+                            <img src="/Img/Home/Popup/1.png" alt="" />
+                          </div>
+						  
+						  <div class="popup__column-content-wrapper">
+							<div class="loading"></div>
+							<p class="popup__result_desc">
+							</p>
+							<div class="popup__column-content">
+								<div class="popup__header">
+								  <h4 class="popup__title">Доставка</h4>
+								  <span class="popup__close close-popup"></span>
+								</div>
+								<form action="api/order" method="POST" class="popup__form _delivery">
+									<!-- BACKEND: POST запрос приходит на эндпоинт api/order, содержит:
+									1) csrfmiddlewaretoken: токен для проверки
+									2) name: имя пользователя
+									3) phone: телефон
+									4) delivery: true - доставка, false - самовывоз
+									5) address: адрес
+									6) floor: этаж
+									7) flat: домофон
+									8) products: словарь заказанных товаров {id товара: его количество}
+									
+									Если delivery false, адрес, этаж, домофон не обрабатываем
+									-->
+
+									<!-- BACKEND: Необходимо в инпуте ниже указать в value csrf-токен (можно посмотреть через print какой ожидает django и прописать тут) -->
+									<input type="hidden" name="csrfmiddlewaretoken" value="">
+									<p class="popup-form__warning">
+										Что-то пошло не так, попробуйте позже.
+									</p>
+								  <input name="name" type="text" placeholder="Ваше имя" id="delivery_input_name" />
+								  <input name="phone" type="tel" placeholder="Телефон" />
+								  <div class="popup__form_radio">
+									<div class="radio__wrapper">
+									  <input
+										type="radio"
+										id="delivery"
+										name="delivery"
+										value="true"
+										checked
+									  />
+									  <label for="delivery">Доставка</label>
+									</div>
+									<div class="radio__wrapper">
+									  <input
+										type="radio"
+										id="pickup"
+										name="delivery"
+										value="false"
+									  />
+									  <label for="pickup">Самовывоз</label>
+									</div>
+								  </div>
+								  <input
+								    name="address"
+									id="delivery_input_address"
+									type="text"
+									placeholder="Улица, дом, квартира"
+								  />
+								  <div class="popup__form_footer_inputs">
+									<input name="floor" type="text" placeholder="Этаж" />
+									<input name="flat" type="text" placeholder="Домофон" />
+								  </div>
+								  <button class="popup__form_button" type="submit">
+									Оформить
+								  </button>
+								</form>
+							</div>
+						  </div>
+
+                        </div>
+                      </div>
+                    </div>
                   </aside>
 
                   <div class="home__content">
@@ -143,55 +237,151 @@
                         <span class="home__item-price">250₽</span>
                         <span class="home__item-name">Розовая сладость</span>
                         <span class="home__item-weight">200г</span>
-                        <button class="home__item-button">Добавить</button>
+                        <!-- В href указываем popup + id товара -->
+                        <a href="#popup1" class="home__item-button popup-link"
+                          >Добавить</a
+                        >
+
+                        <!-- В id указываем popup + id товара -->
+						<!-- В data-id указываем id товара -->
+                        <div class="popup" data-id="1" id="popup1">
+                          <div class="popup__body">
+                            <div class="popup__content">
+                              <div class="popup__header">
+                                <h3 class="popup__title">Розовая сладость</h3>
+                                <span class="popup__close close-popup"></span>
+                              </div>
+
+                              <div class="popup__content-wrapper">
+                                <img
+                                  src="/Img/Home/Items/1.jpg"
+                                  alt=""
+                                  class="popup__image"
+                                />
+                                <div class="popup__text">
+                                  <p class="popup__description">
+                                    Большая рубленая котлета из свежего говяжего
+                                    мяса покорит вас своей сочностью, а
+                                    хрустящие листья салата добавят свежести.
+                                    (лень писать про пончик реально)
+                                  </p>
+                                  <figure class="popup__structure structure">
+                                    <figcaption class="structure__title">
+                                      Состав:
+                                    </figcaption>
+                                    <ul class="structure__list">
+                                      <li>Пшеничная булочка</li>
+                                      <li>Котлета из говядины</li>
+                                      <li>Красный лук</li>
+                                      <li>Листья салата</li>
+                                      <li>Соус горчичный</li>
+                                    </ul>
+                                  </figure>
+                                  <p class="popup__weight">200г, ккал 430</p>
+                                </div>
+                              </div>
+                              <div class="popup__footer">
+                                <div class="popup__buttons-wrapper">
+                                  <button class="popup__button close-popup">
+                                    Добавить
+                                  </button>
+                                  <div class="popup__counter counter">
+                                    <button
+                                      class="counter__button counter__button_del"
+                                    >
+                                      -
+                                    </button>
+                                    <span class="counter__value">1</span>
+                                    <button
+                                      class="counter__button counter__button_add"
+                                    >
+                                      +
+                                    </button>
+                                  </div>
+                                </div>
+                                <span class="popup__price">250₽</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
 
-                      <div class="home__item">
+					  <div class="home__item">
                         <img
                           class="home__item-image"
-                          src="Img/Home/Items/1.jpg"
+                          src="Img/Home/Items/2.jpg"
                           alt=""
                         />
-                        <span class="home__item-price">250₽</span>
-                        <span class="home__item-name">Розовая сладость</span>
+                        <span class="home__item-price">200₽</span>
+                        <span class="home__item-name">Максим</span>
                         <span class="home__item-weight">200г</span>
-                        <button class="home__item-button">Добавить</button>
-                      </div>
+                        <!-- В href указываем popup + id товара -->
+                        <a href="#popup2" class="home__item-button popup-link"
+                          >Добавить</a
+                        >
 
-                      <div class="home__item">
-                        <img
-                          class="home__item-image"
-                          src="Img/Home/Items/1.jpg"
-                          alt=""
-                        />
-                        <span class="home__item-price">250₽</span>
-                        <span class="home__item-name">Розовая сладость</span>
-                        <span class="home__item-weight">200г</span>
-                        <button class="home__item-button">Добавить</button>
-                      </div>
+                        <!-- В id указываем popup + id товара -->
+						<!-- В data-id указываем id товара -->
+                        <div class="popup" data-id="2" id="popup2">
+                          <div class="popup__body">
+                            <div class="popup__content">
+                              <div class="popup__header">
+                                <h3 class="popup__title">Максим</h3>
+                                <span class="popup__close close-popup"></span>
+                              </div>
 
-                      <div class="home__item">
-                        <img
-                          class="home__item-image"
-                          src="Img/Home/Items/1.jpg"
-                          alt=""
-                        />
-                        <span class="home__item-price">250₽</span>
-                        <span class="home__item-name">Розовая сладость</span>
-                        <span class="home__item-weight">200г</span>
-                        <button class="home__item-button">Добавить</button>
-                      </div>
-
-                      <div class="home__item">
-                        <img
-                          class="home__item-image"
-                          src="Img/Home/Items/1.jpg"
-                          alt=""
-                        />
-                        <span class="home__item-price">250₽</span>
-                        <span class="home__item-name">Розовая сладость</span>
-                        <span class="home__item-weight">200г</span>
-                        <button class="home__item-button">Добавить</button>
+                              <div class="popup__content-wrapper">
+                                <img
+                                  src="/Img/Home/Items/2.jpg"
+                                  alt=""
+                                  class="popup__image"
+                                />
+                                <div class="popup__text">
+                                  <p class="popup__description">
+                                    Большая рубленая котлета из свежего говяжего
+                                    мяса покорит вас своей сочностью, а
+                                    хрустящие листья салата добавят свежести.
+                                    (лень писать про пончик реально)
+                                  </p>
+                                  <figure class="popup__structure structure">
+                                    <figcaption class="structure__title">
+                                      Состав:
+                                    </figcaption>
+                                    <ul class="structure__list">
+                                      <li>Пшеничная булочка</li>
+                                      <li>Котлета из говядины</li>
+                                      <li>Красный лук</li>
+                                      <li>Листья салата</li>
+                                      <li>Соус горчичный</li>
+                                    </ul>
+                                  </figure>
+                                  <p class="popup__weight">200г, ккал 430</p>
+                                </div>
+                              </div>
+                              <div class="popup__footer">
+                                <div class="popup__buttons-wrapper">
+                                  <button class="popup__button close-popup">
+                                    Добавить
+                                  </button>
+                                  <div class="popup__counter counter">
+                                    <button
+                                      class="counter__button counter__button_del"
+                                    >
+                                      -
+                                    </button>
+                                    <span class="counter__value">1</span>
+                                    <button
+                                      class="counter__button counter__button_add"
+                                    >
+                                      +
+                                    </button>
+                                  </div>
+                                </div>
+                                <span class="popup__price">200₽</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
 
                       <!-- Всегда должен быть один пустой -->
