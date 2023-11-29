@@ -1,247 +1,332 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <title>Кто пончик?</title>
-    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+<head>
+    <title>YourMeal</title>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <link rel="stylesheet" href="{% static 'Css/style.css' %}" />
-  </head>
+    <link rel="stylesheet" href="{% static 'Css/style.css' %}"/>
+    <link rel="shortcut icon" href="{% static 'Img/Home/Filter/1.png' %}" type="image/x-icon"/>
+</head>
 
-  <body>
-    <div class="wrapper">
-<header>
-  <div class="container">
-    <div class="header__container">
-      <div class="header__body">
-        <div class="header__logo">
-          <img src="{% static 'Img/Header/logo.svg' %}" alt="" />
-        </div>
-        <div class="header__content">
-          <div class="header__image">
-            <img src="{% static 'Img/Header/Image.svg' %}" alt="" />
-          </div>
-          <div class="header__text">
-            <h2 class="header__title">
-              Только самые <span>мягкие булочки!</span>
-            </h2>
-            <p class="header__text_delivery">Бесплатная доставка от 599₽</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-      <main>
-        <section>
-          <div class="container">
-            <div class="home">
-              <div class="home__body">
-                <form action="POST" class="home__filter">
-                  <nav class="home__categories">
-                    <ul class="categories__list">
-                      <li class="_active">
-                        <button>
-                          <img src="{% static 'Img/Home/Filter/1.png' %}" alt="" />
-                          <span>Пончики</span>
-                        </button>
-                      </li>
-                      <li>
-                        <button>
-                          <img src="{% static 'Img/Home/Filter/2.png' %}" alt="" />
-                          <span>Кексы</span>
-                        </button>
-                      </li>
-                      <li>
-                        <button>
-                          <img src="{% static 'Img/Home/Filter/3.png' %}" alt="" />
-                          <span>Круассаны</span>
-                        </button>
-                      </li>
-                      <li>
-                        <button>
-                          <img src="{% static 'Img/Home/Filter/4.png' %}" alt="" />
-                          <span>Печенье</span>
-                        </button>
-                      </li>
-                      <li>
-                        <button>
-                          <img src="{% static 'Img/Home/Filter/5.png' %}" alt="" />
-                          <span>Крендели</span>
-                        </button>
-                      </li>
-                      <li>
-                        <button>
-                          <img src="{% static 'Img/Home/Filter/6.png' %}" alt="" />
-                          <span>Хлеб</span>
-                        </button>
-                      </li>
-                    </ul>
-                  </nav>
-                </form>
-
-                <div class="home__container">
-                  <aside class="home__cart">
-                    <form action="POST">
-                      <div class="cart__header">
-                        <span class="cart__title">Корзина</span>
-                        <span class="cart__counter">5</span>
-                      </div>
-                      <div class="cart__body">
-                        <!-- Если корзина пустая -->
-                        <!-- <p class="cart__text-empty">Тут пока пусто :(</p> -->
-                        <!-- А это если не пустая -->
-                        <div class="cart__items">
-                          <div class="cart__item">
-                            <div class="cart__item-body">
-                              <img
-                                class="cart__item-image"
-                                src="{% static 'Img/Home/Items/1.jpg' %}"
-                                alt=""
-                              />
-                              <div class="cart__item-description">
-                                <span class="cart__item-title"
-                                  >Супер розовый</span
-                                >
-                                <span class="cart__item-weight">512г</span>
-                                <span class="cart__item-price">550₽</span>
-                              </div>
-                            </div>
-                            <div class="cart__item-counter">
-                              <button class="cart__item-counter-button">
-                                -
-                              </button>
-                              <span class="cart__item-counter-value">1</span>
-                              <button class="cart__item-counter-button">
-                                +
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="cart__result">
-                          <span>Итого</span>
-                          <span>550₽</span>
-                        </div>
-                        <button class="cart__button">Оформить заказ</button>
-                        <!-- Если цена больше 599 -->
-                        <span class="cart__delivery">Бесплатная доставка</span>
-                      </div>
-                    </form>
-                  </aside>
-
-                  <div class="home__content">
-                    <h1 class="home__title">Пончики</h1>
-                    <div class="home__items">
-                      <div class="home__item">
-                        <img
-                          class="home__item-image"
-                          src="{% static 'Img/Home/Items/1.jpg' %}"
-                          alt=""
-                        />
-                        <span class="home__item-price">250₽</span>
-                        <span class="home__item-name">Розовая сладость</span>
-                        <span class="home__item-weight">200г</span>
-                        <button class="home__item-button">Добавить</button>
-                      </div>
-
-                      <div class="home__item">
-                        <img
-                          class="home__item-image"
-                          src="{% static 'Img/Home/Items/1.jpg' %}"
-                          alt=""
-                        />
-                        <span class="home__item-price">250₽</span>
-                        <span class="home__item-name">Розовая сладость</span>
-                        <span class="home__item-weight">200г</span>
-                        <button class="home__item-button">Добавить</button>
-                      </div>
-
-                      <div class="home__item">
-                        <img
-                          class="home__item-image"
-                          src="{% static 'Img/Home/Items/1.jpg' %}"
-                          alt=""
-                        />
-                        <span class="home__item-price">250₽</span>
-                        <span class="home__item-name">Розовая сладость</span>
-                        <span class="home__item-weight">200г</span>
-                        <button class="home__item-button">Добавить</button>
-                      </div>
-
-                      <div class="home__item">
-                        <img
-                          class="home__item-image"
-                          src="{% static 'Img/Home/Items/1.jpg' %}"
-                          alt=""
-                        />
-                        <span class="home__item-price">250₽</span>
-                        <span class="home__item-name">Розовая сладость</span>
-                        <span class="home__item-weight">200г</span>
-                        <button class="home__item-button">Добавить</button>
-                      </div>
-
-                      <div class="home__item">
-                        <img
-                          class="home__item-image"
-                          src="{% static 'Img/Home/Items/1.jpg' %}"
-                          alt=""
-                        />
-                        <span class="home__item-price">250₽</span>
-                        <span class="home__item-name">Розовая сладость</span>
-                        <span class="home__item-weight">200г</span>
-                        <button class="home__item-button">Добавить</button>
-                      </div>
-
-                      <!-- Всегда должен быть один пустой -->
-                      <div class="home__item-empty-space"></div>
+<body>
+<div class="wrapper">
+    <header>
+        <div class="container">
+            <div class="header__container">
+                <div class="header__body">
+                    <div class="header__logo">
+                        <img src="{% static 'Img/Header/logo.svg' %}" alt=""/>
                     </div>
-                  </div>
+                    <div class="header__content">
+                        <div class="header__image">
+                            <img src="{% static 'Img/Header/Image.svg' %}" alt=""/>
+                        </div>
+                        <div class="header__text">
+                            <h2 class="header__title">
+                                Только самые <span>мягкие булочки!</span>
+                            </h2>
+                            <p class="header__text_delivery">Бесплатная доставка от 599₽</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </section>
-      </main>
+        </div>
+    </header>
+    <main>
+        <section>
+            <div class="container">
+                <div class="home">
+                    <div class="home__body">
+                        <form action="" method="GET" class="home__filter">
+                            <input id="filter_input" type="hidden" value="0" name="category">
+                            <nav class="home__categories">
+                                <ul class="categories__list">
+                                    <li class="_active">
+                                    <li data-id="0">
+                                        <button>
+                                            <img src="{% static 'Img/Home/Filter/0.png' %}" alt=""/>
+                                            <span>Все</span>
+                                        </button>
+                                    </li>
+                                    {% for c in categories %}
+                                    <li data-id={{c.pk}}>
+                                        <button>
+                                            <img src={{c.image.url}} alt=""/>
+                                            <span>{{c.name}}</span>
+                                        </button>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </nav>
+                        </form>
+
+                        <div class="home__container">
+                            <aside class="home__cart">
+                                <div class="cart__header">
+                                    <span class="cart__title">Корзина</span>
+                                    <span class="cart__counter">0</span>
+                                </div>
+                                <div class="cart__body empty">
+                                    <!-- Если корзина пустая (отрабатывает на стороне фронта) -->
+                                    <p class="cart__text-empty">Тут пока пусто :(</p>
+
+                                    <!-- А это если не пустая (отрабатывает на стороне фронта) -->
+                                    <div class="cart__items-wrapper">
+                                        <div class="cart__items">
+                                            <div class="cart__item cart__item_template">
+                                                <div class="cart__item-body">
+                                                    <img
+                                                            class="cart__item-image"
+                                                            src="{% static 'Img/Home/Items/1.jpg' %}"
+                                                            alt=""
+                                                    />
+                                                    <div class="cart__item-description">
+                                <span class="cart__item-title"
+                                ></span
+                                >
+                                                        <span class="cart__item-weight"></span>
+                                                        <span class="cart__item-price"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="cart__item-counter counter">
+                                                    <button
+                                                            class="counter__button counter__button_del"
+                                                    >
+                                                        -
+                                                    </button>
+                                                    <span class="counter__value">1</span>
+                                                    <button
+                                                            class="counter__button counter__button_add"
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cart__result">
+                                            <span>Итого</span>
+                                            <span class="cart__total_price">250₽</span>
+                                        </div>
+                                        <a href="popup_delivery" class="cart__button popup-link"
+                                        >Оформить заказ</a
+                                        >
+                                        <!-- Если цена больше 599 (отрабатывает на стороне фронта) -->
+                                        <span class="cart__delivery">Бесплатная доставка</span>
+                                    </div>
+                                </div>
+
+                                <div class="popup popup__delivery" id="popup_delivery">
+                                    <div class="popup__body">
+                                        <div class="popup__content">
+                                            <div class="popup__column-image">
+                                                <img src="{% static 'Img/Home/Popup/1.png' %}" alt=""/>
+                                            </div>
+
+                                            <div class="popup__column-content-wrapper">
+                                                <div class="loading"></div>
+                                                <p class="popup__result_desc">
+                                                </p>
+                                                <div class="popup__column-content">
+                                                    <div class="popup__header">
+                                                        <h4 class="popup__title">Доставка</h4>
+                                                        <span class="popup__close close-popup"></span>
+                                                    </div>
+                                                    <form action="api/order" method="POST"
+                                                          class="popup__form _delivery">
+                                                        <!-- BACKEND: POST запрос приходит на эндпоинт api/order, содержит:
+                                                        1) csrfmiddlewaretoken: токен для проверки
+                                                        2) name: имя пользователя
+                                                        3) phone: телефон
+                                                        4) delivery: true - доставка, false - самовывоз
+                                                        5) address: адрес
+                                                        6) floor: этаж
+                                                        7) flat: домофон
+                                                        8) products: словарь заказанных товаров {id товара: его количество}
+
+                                                        Если delivery false, адрес, этаж, домофон не обрабатываем
+                                                        -->
+
+                                                        <!-- BACKEND: Необходимо в инпуте ниже указать в value csrf-токен (можно посмотреть через print какой ожидает django и прописать тут) -->
+                                                        <input type="hidden" name="csrfmiddlewaretoken" value="">
+                                                        <p class="popup-form__warning">
+                                                            Что-то пошло не так, попробуйте позже.
+                                                        </p>
+                                                        <input name="name" type="text" placeholder="Ваше имя"
+                                                               id="delivery_input_name"/>
+                                                        <input name="phone" type="tel" placeholder="Телефон"/>
+                                                        <div class="popup__form_radio">
+                                                            <div class="radio__wrapper">
+                                                                <input
+                                                                        type="radio"
+                                                                        id="delivery"
+                                                                        name="delivery"
+                                                                        value="true"
+                                                                        checked
+                                                                />
+                                                                <label for="delivery">Доставка</label>
+                                                            </div>
+                                                            <div class="radio__wrapper">
+                                                                <input
+                                                                        type="radio"
+                                                                        id="pickup"
+                                                                        name="delivery"
+                                                                        value="false"
+                                                                />
+                                                                <label for="pickup">Самовывоз</label>
+                                                            </div>
+                                                        </div>
+                                                        <input
+                                                                name="address"
+                                                                id="delivery_input_address"
+                                                                type="text"
+                                                                placeholder="Улица, дом, квартира"
+                                                        />
+                                                        <div class="popup__form_footer_inputs">
+                                                            <input name="floor" type="text" placeholder="Этаж"/>
+                                                            <input name="flat" type="text" placeholder="Домофон"/>
+                                                        </div>
+                                                        <button class="popup__form_button" type="submit">
+                                                            Оформить
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </aside>
+
+                            <div class="home__content">
+                                <h1 class="home__title">{{selected_category.name}}</h1>
+                                <div class="home__items">
+                                    {% for p in products %}
+                                    <div class="home__item">
+                                        <img
+                                                class="home__item-image"
+                                                src={{p.photo.url}}
+                                                alt=""
+                                        />
+                                        <span class="home__item-price">{{p.price}}₽</span>
+                                        <span class="home__item-name">{{p.name}}</span>
+                                        <span class="home__item-weight">{{p.weight}}г</span>
+                                        <!-- В href указываем popup + id товара -->
+                                        <a href="#popup{{p.pk}}" class="home__item-button popup-link"
+                                        >Добавить</a
+                                        >
+                                    </div>
+
+                                    <!-- В id указываем popup + id товара -->
+                                    <!-- В data-id указываем id товара -->
+                                    <div class="popup" data-id={{p.pk}} id="popup{{p.pk}}">
+                                        <div class="popup__body">
+                                            <div class="popup__content">
+                                                <div class="popup__header">
+                                                    <h3 class="popup__title">{{p.name}}</h3>
+                                                    <span class="popup__close close-popup"></span>
+                                                </div>
+
+                                                <div class="popup__content-wrapper">
+                                                    <img
+                                                            src={{p.photo.url}}
+                                                            alt=""
+                                                            class="popup__image"
+                                                    />
+                                                    <div class="popup__text">
+                                                        <p class="popup__description">
+                                                            {{p.description}}
+                                                        </p>
+                                                        <figure class="popup__structure structure">
+                                                            <figcaption class="structure__title">
+                                                                Состав:
+                                                            </figcaption>
+                                                            <ul class="structure__list">
+                                                                {% for i in p.ingredients.all %}
+                                                                <li>{{i.name}}</li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        </figure>
+                                                        <p class="popup__weight">{{p.weight}}г, ккал {{p.calories}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="popup__footer">
+                                                    <div class="popup__buttons-wrapper">
+                                                        <button class="popup__button close-popup">
+                                                            Добавить
+                                                        </button>
+                                                        <div class="popup__counter counter">
+                                                            <button
+                                                                    class="counter__button counter__button_del"
+                                                            >
+                                                                -
+                                                            </button>
+                                                            <span class="counter__value">1</span>
+                                                            <button
+                                                                    class="counter__button counter__button_add"
+                                                            >
+                                                                +
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <span class="popup__price">{{p.price}}₽</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <!-- Всегда должен быть один пустой -->
+                                <div class="home__item-empty-space"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+</section>
+</main>
 <footer>
-  <div class="container">
-    <div class="footer__container">
-      <div class="footer__body">
-        <div class="footer_logo">
-          <img src="{% static 'Img/Footer/Logo.svg' %}" alt="" />
-          <span>© YouMeal, 2023</span>
-        </div>
+    <div class="container">
+        <div class="footer__container">
+            <div class="footer__body">
+                <div class="footer_logo">
+                    <img src="{% static 'Img/Footer/Logo.svg' %}" alt=""/>
+                    <span>© YouMeal, 2023</span>
+                </div>
 
-        <div class="footer_contacts">
-          <p class="footer__title">Номер для заказа</p>
-          <a href="tel:8 (900) 000-00-00" class="footer__phone"
-            >+7 (900) 000-00-00</a
-          >
-        </div>
+                <div class="footer_contacts">
+                    <p class="footer__title">Номер для заказа</p>
+                    <a href="tel:8 (900) 000-00-00" class="footer__phone"
+                    >+7 (900) 000-00-00</a
+                    >
+                </div>
 
-        <div class="footer_social">
-          <p class="footer__title">Мы в соцсетях</p>
-          <nav class="footer__links">
-            <ul class="footer__links-list">
-              <li>
-                <a href="">
-                  <img src="{% static 'Img/Footer/Icon_2.svg' %}" alt="" />
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  <img src="{% static 'Img/Footer/Icon_3.svg' %}" alt="" />
-                </a>
-              </li>
-            </ul>
-          </nav>
+                <div class="footer_social">
+                    <p class="footer__title">Мы в соцсетях</p>
+                    <nav class="footer__links">
+                        <ul class="footer__links-list">
+                            <li>
+                                <a href="">
+                                    <img src="{% static 'Img/Footer/Icon_2.svg' %}" alt=""/>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <img src="{% static 'Img/Footer/Icon_3.svg' %}" alt=""/>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </footer>
-    </div>
-<script src="Js/main.js"></script>  </body>
+</div>
+<script src="{% static 'Js/main.js' %}"></script>
+</body>
 </html>
