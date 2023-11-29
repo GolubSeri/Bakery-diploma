@@ -137,6 +137,7 @@
                                                     </div>
                                                     <form action="api/order" method="POST"
                                                           class="popup__form _delivery">
+                                                        {% csrf_token %}
                                                         <!-- BACKEND: POST запрос приходит на эндпоинт api/order, содержит:
                                                         1) csrfmiddlewaretoken: токен для проверки
                                                         2) name: имя пользователя
@@ -150,8 +151,6 @@
                                                         Если delivery false, адрес, этаж, домофон не обрабатываем
                                                         -->
 
-                                                        <!-- BACKEND: Необходимо в инпуте ниже указать в value csrf-токен (можно посмотреть через print какой ожидает django и прописать тут) -->
-                                                        <input type="hidden" name="csrfmiddlewaretoken" value="">
                                                         <p class="popup-form__warning">
                                                             Что-то пошло не так, попробуйте позже.
                                                         </p>
@@ -218,61 +217,62 @@
                                         <a href="#popup{{p.pk}}" class="home__item-button popup-link"
                                         >Добавить</a
                                         >
-                                    </div>
 
-                                    <!-- В id указываем popup + id товара -->
-                                    <!-- В data-id указываем id товара -->
-                                    <div class="popup" data-id={{p.pk}} id="popup{{p.pk}}">
-                                        <div class="popup__body">
-                                            <div class="popup__content">
-                                                <div class="popup__header">
-                                                    <h3 class="popup__title">{{p.name}}</h3>
-                                                    <span class="popup__close close-popup"></span>
-                                                </div>
-
-                                                <div class="popup__content-wrapper">
-                                                    <img
-                                                            src={{p.photo.url}}
-                                                            alt=""
-                                                            class="popup__image"
-                                                    />
-                                                    <div class="popup__text">
-                                                        <p class="popup__description">
-                                                            {{p.description}}
-                                                        </p>
-                                                        <figure class="popup__structure structure">
-                                                            <figcaption class="structure__title">
-                                                                Состав:
-                                                            </figcaption>
-                                                            <ul class="structure__list">
-                                                                {% for i in p.ingredients.all %}
-                                                                <li>{{i.name}}</li>
-                                                                {% endfor %}
-                                                            </ul>
-                                                        </figure>
-                                                        <p class="popup__weight">{{p.weight}}г, ккал {{p.calories}}</p>
+                                        <!-- В id указываем popup + id товара -->
+                                        <!-- В data-id указываем id товара -->
+                                        <div class="popup" data-id="{{p.pk}}" id="popup{{p.pk}}">
+                                            <div class="popup__body">
+                                                <div class="popup__content">
+                                                    <div class="popup__header">
+                                                        <h3 class="popup__title">{{p.name}}</h3>
+                                                        <span class="popup__close close-popup"></span>
                                                     </div>
-                                                </div>
-                                                <div class="popup__footer">
-                                                    <div class="popup__buttons-wrapper">
-                                                        <button class="popup__button close-popup">
-                                                            Добавить
-                                                        </button>
-                                                        <div class="popup__counter counter">
-                                                            <button
-                                                                    class="counter__button counter__button_del"
-                                                            >
-                                                                -
-                                                            </button>
-                                                            <span class="counter__value">1</span>
-                                                            <button
-                                                                    class="counter__button counter__button_add"
-                                                            >
-                                                                +
-                                                            </button>
+
+                                                    <div class="popup__content-wrapper">
+                                                        <img
+                                                                src={{p.photo.url}}
+                                                                alt=""
+                                                                class="popup__image"
+                                                        />
+                                                        <div class="popup__text">
+                                                            <p class="popup__description">
+                                                                {{p.description}}
+                                                            </p>
+                                                            <figure class="popup__structure structure">
+                                                                <figcaption class="structure__title">
+                                                                    Состав:
+                                                                </figcaption>
+                                                                <ul class="structure__list">
+                                                                    {% for i in p.ingredients.all %}
+                                                                    <li>{{i.name}}</li>
+                                                                    {% endfor %}
+                                                                </ul>
+                                                            </figure>
+                                                            <p class="popup__weight">{{p.weight}}г, ккал
+                                                                {{p.calories}}</p>
                                                         </div>
                                                     </div>
-                                                    <span class="popup__price">{{p.price}}₽</span>
+                                                    <div class="popup__footer">
+                                                        <div class="popup__buttons-wrapper">
+                                                            <button class="popup__button close-popup">
+                                                                Добавить
+                                                            </button>
+                                                            <div class="popup__counter counter">
+                                                                <button
+                                                                        class="counter__button counter__button_del"
+                                                                >
+                                                                    -
+                                                                </button>
+                                                                <span class="counter__value">1</span>
+                                                                <button
+                                                                        class="counter__button counter__button_add"
+                                                                >
+                                                                    +
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <span class="popup__price">{{p.price}}₽</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
