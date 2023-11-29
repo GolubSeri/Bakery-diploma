@@ -311,7 +311,7 @@ header .container {
 .categories__list li:last-child {
   margin-right: 0;
 }
-.categories__list li button {
+.categories__list li button img {
   max-width: 24px;
   min-height: 24px;
 }
