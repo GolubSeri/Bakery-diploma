@@ -103,6 +103,8 @@
                       <!-- А это если не пустая (отрабатывает на стороне фронта) -->
                       <div class="cart__items-wrapper">
                         <div class="cart__items">
+							<!-- Должен быть обязательно cart__item_template -->
+
                           <div class="cart__item cart__item_template">
                             <div class="cart__item-body">
                               <img
@@ -132,6 +134,7 @@
                               </button>
                             </div>
                           </div>
+
                         </div>
                         <div class="cart__result">
                           <span>Итого</span>
@@ -174,9 +177,6 @@
 									
 									Если delivery false, адрес, этаж, домофон не обрабатываем
 									-->
-
-									<!-- BACKEND: Необходимо в инпуте ниже указать в value csrf-токен (можно посмотреть через print какой ожидает django и прописать тут) -->
-									<input type="hidden" name="csrfmiddlewaretoken" value="">
 									<p class="popup-form__warning">
 										Что-то пошло не так, попробуйте позже.
 									</p>
