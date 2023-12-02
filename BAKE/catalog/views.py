@@ -1,7 +1,7 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 
 from .models import *
+from contacts.models import Contacts
 
 
 # Create your views here.
@@ -17,7 +17,8 @@ def index(request):
         context = {
             'products': products,
             'categories': Category.objects.all(),
-            'selected_category': category
+            'selected_category': category,
+            'contacts': Contacts.objects.get(pk=1)
         }
 
     return render(request, 'index.html', context)

@@ -36,7 +36,6 @@ def order(request):
 @csrf_exempt
 def cart(request):
     if request.method == "POST":
-        print(request.POST)
         cart_request = eval(request.POST['cart'])
         cart_response = {}
         for id, count in cart_request.items():

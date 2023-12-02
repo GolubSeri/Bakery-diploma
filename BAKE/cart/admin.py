@@ -1,6 +1,9 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
 
 from cart.models import OrderProductsCount, Order
+
+admin.site.unregister(Group)
 
 
 # Register your models here.
@@ -22,6 +25,7 @@ class OrderCountInline(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderCountInline]
+    readonly_fields = ('created_at',)
 
     def has_add_permission(self, request, obj=None):
         return False
