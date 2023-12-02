@@ -22,7 +22,8 @@ from BAKE import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('catalog.urls'))
+    path('', include('catalog.urls')),
+    path('api/', include('cart.urls'))
 ]
 
 if settings.DEBUG:
