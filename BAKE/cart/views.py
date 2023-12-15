@@ -16,7 +16,7 @@ def order(request):
             'floor': request.POST['floor'],
             'flat': request.POST['flat']
         }
-        if order_dict['delivery']:
+        if order_dict['delivery'] == "true":
             order_dict['delivery'] = 'Доставка'
         else:
             order_dict['delivery'] = 'Самовывоз'
@@ -47,4 +47,5 @@ def cart(request):
                 'price': product.price,
                 'photo_url': product.photo.url
             }
+        print(cart_response)
         return JsonResponse(cart_response)
