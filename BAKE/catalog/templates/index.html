@@ -71,7 +71,7 @@
                                     <span class="cart__title">Корзина</span>
                                     <span class="cart__counter">0</span>
                                 </div>
-                                <div class="cart__body empty">
+                                <div class="cart__body _empty">
                                     <!-- Если корзина пустая (отрабатывает на стороне фронта) -->
                                     <p class="cart__text-empty">Тут пока пусто :(</p>
 
@@ -279,9 +279,9 @@
                                         </div>
                                     </div>
                                     {% endfor %}
+                                    <!-- Всегда должен быть один пустой -->
+                                    <div class="home__item-empty-space"></div>
                                 </div>
-                                <!-- Всегда должен быть один пустой -->
-                                <div class="home__item-empty-space"></div>
                             </div>
                         </div>
                     </div>
